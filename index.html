@@ -36,21 +36,22 @@
         .about {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             margin-bottom: 20px;
         }
-        .headshot {
+        .images {
             flex: 1;
-            max-width: 200px;
-            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        .headshot img {
+        .images img {
             width: 100%;
-            border-radius: 50%;
+            border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .intro {
             flex: 2;
+            margin-left: 20px;
         }
         .intro h2 {
             margin-top: 0;
@@ -93,8 +94,9 @@
     <main>
         <!-- About Section -->
         <section class="about">
-            <div class="headshot">
-                <img src="headshot_example.jpg" alt="Headshot">
+            <div class="images">
+                <img src="closeup.jpg" alt="Closeup of safety equipment">
+                <img src="far.jpg" alt="Far view of a worksite">
             </div>
             <div class="intro">
                 <h2>Welcome</h2>
@@ -157,17 +159,16 @@
             }
         }
 
-        // Obfuscate Email Address
-        function obfuscateEmail() {
-            const emailUser = "info";
-            const emailDomain = "safetyconsulting.com";
+        // Display Email Address
+        function displayEmail() {
+            const email = "sjasso@westriv.com";
             const emailElement = document.getElementById("email");
 
-            emailElement.innerHTML = `<a href="mailto:${emailUser}@${emailDomain}">${emailUser}@${emailDomain}</a>`;
+            emailElement.innerHTML = `<a href="mailto:${email}">${email}</a>`;
         }
 
         fetchAndDisplayCalendar();
-        obfuscateEmail();
+        displayEmail();
     </script>
 </body>
 </html>
