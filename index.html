@@ -35,23 +35,23 @@
         }
         .about {
             display: flex;
-            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
             margin-bottom: 20px;
+            gap: 20px;
         }
         .images {
-            flex: 1;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            flex: 1;
+            gap: 10px;
         }
         .images img {
-            width: 100%;
+            width: 48%;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .intro {
             flex: 2;
-            margin-left: 20px;
         }
         .intro h2 {
             margin-top: 0;
@@ -60,115 +60,4 @@
             margin-top: 20px;
             font-size: 1.1em;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #004080;
-            color: white;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-            background-color: #004080;
-            color: white;
-        }
-        footer p {
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Safety Consulting Services</h1>
-        <p>MSHA & OSHA Training | Safety Inspections</p>
-    </header>
-    <main>
-        <!-- About Section -->
-        <section class="about">
-            <div class="images">
-                <img src="closeup.jpg" alt="Closeup of safety equipment">
-                <img src="far.jpg" alt="Far view of a worksite">
-            </div>
-            <div class="intro">
-                <h2>Welcome</h2>
-                <p>
-                    With years of experience in workplace safety, I specialize in providing comprehensive MSHA and OSHA training,
-                    as well as thorough safety inspections. Let me help ensure your workplace remains safe, compliant, and efficient.
-                </p>
-                <div class="contact">
-                    <p><strong>Phone:</strong> (555) 123-4567</p>
-                    <p><strong>Email:</strong> <span id="email"></span></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Calendar Section -->
-        <section class="calendar">
-            <h2>Upcoming Training & Inspection Dates</h2>
-            <table id="calendar-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Event</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Safety Consulting Services. All rights reserved.</p>
-    </footer>
-
-    <script>
-        const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8V8MfXpbPApBfRBBzQXf01d3mx-1zwCruuS-3t14XqLMr_4Ug2hoeujh38nnnpj71g6CaPmCl7GLU/pub?output=csv";
-
-        async function fetchAndDisplayCalendar() {
-            try {
-                const response = await fetch(csvUrl);
-                const csvText = await response.text();
-
-                const rows = csvText.split("\n").map(row => row.split(","));
-
-                const tbody = document.querySelector("#calendar-table tbody");
-                tbody.innerHTML = "";
-
-                for (let i = 1; i < rows.length; i++) {
-                    const tr = document.createElement("tr");
-
-                    rows[i].forEach(cell => {
-                        const td = document.createElement("td");
-                        td.textContent = cell.trim();
-                        tr.appendChild(td);
-                    });
-
-                    tbody.appendChild(tr);
-                }
-            } catch (error) {
-                console.error("Error fetching or parsing CSV data:", error);
-            }
-        }
-
-        // Display Email Address
-        function displayEmail() {
-            const email = "sjasso@westriv.com";
-            const emailElement = document.getElementById("email");
-
-            emailElement.innerHTML = `<a href="mailto:${email}">${email}</a>`;
-        }
-
-        fetchAndDisplayCalendar();
-        displayEmail();
-    </script>
-</body>
-</html>
+    
