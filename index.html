@@ -95,8 +95,8 @@
         <!-- About Section -->
         <section class="about">
             <div class="images">
-                <img src="closeup.jpg" alt="Closeup of safety equipment">
-                <img src="far.jpg" alt="Far view of a worksite">
+                <img src="closeup.jpg" alt="Shilo">
+                <img src="far.jpg" alt="Shilo next to a haul truck">
             </div>
             <div class="intro">
                 <h2>Welcome</h2>
@@ -140,9 +140,17 @@
 
                 const rows = csvText.split("\n").map(row => row.split(","));
 
+                // Check if CSV contains any data (excluding headers)
+                if (rows.length <= 1 || rows[1].length === 0) {
+                    // If CSV is empty, hide the calendar section
+                    document.querySelector(".calendar").style.display = "none";
+                    return;  // Exit the function early if no data
+                }
+
                 const tbody = document.querySelector("#calendar-table tbody");
                 tbody.innerHTML = "";
 
+                // Populate the table with CSV data
                 for (let i = 1; i < rows.length; i++) {
                     const tr = document.createElement("tr");
 
@@ -156,12 +164,15 @@
                 }
             } catch (error) {
                 console.error("Error fetching or parsing CSV data:", error);
+                document.querySelector(".calendar").style.display = "none";  // Hide the calendar in case of an error
             }
         }
 
-        // Display Email Address
+        // Display Email Address via string concatenation
         function displayEmail() {
-            const email = "sjasso@westriv.com";
+            const part1 = "sjasso";
+            const part2 = "@westriv.com";
+            const email = part1 + part2;  // Concatenate the two parts
             const emailElement = document.getElementById("email");
 
             emailElement.innerHTML = `<a href="mailto:${email}">${email}</a>`;
