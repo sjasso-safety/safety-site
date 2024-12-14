@@ -40,16 +40,34 @@
             margin-bottom: 20px;
             gap: 20px;
         }
+        /* Main layout and container */
         .images {
-            display: flex;
-            flex: 1;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);  /* 3 columns for bigger images */
+            gap: 20px;  /* Space between images */
+            margin-bottom: 20px;  /* Adds space between the images section and text */
         }
+        
         .images img {
-            width: 30%;  /* Adjust to fit the layout better */
+            width: 100%;  /* Make images take up full column width */
+            height: auto;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+        
+        /* Ensures images resize well on smaller screens */
+        @media (max-width: 768px) {
+            .images {
+                grid-template-columns: 1fr 1fr;  /* 2 columns on smaller screens */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .images {
+                grid-template-columns: 1fr;  /* 1 column on very small screens */
+            }
+        }
+
         .intro {
             flex: 2;
         }
