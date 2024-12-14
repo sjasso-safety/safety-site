@@ -131,7 +131,7 @@
     </footer>
 
     <script>
-        const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8V8MfXpbPApBfRBBzQXf01d3mx-1zwCruuS-3t14XqLMr_4Ug2hoeujh38nnnpj71g6CaPmCl7GLU/pub?output=csv";
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8V8MfXpbPApBfRBBzQXf01d3mx-1zwCruuS-3t14XqLMr_4Ug2hoeujh38nnnpj71g6CaPmCl7GLU/pub?output=csv";
 
 async function fetchAndDisplayCalendar() {
     try {
@@ -160,9 +160,8 @@ async function fetchAndDisplayCalendar() {
             const eventTime = rows[i][1].trim();     // Assuming time is in the second column (index 1)
             const eventTitle = rows[i][2].trim();    // Assuming event title is in the third column (index 2)
 
-            // Convert event date string to Date object (assuming format is MM/DD/YYYY)
-            const [month, day, year] = eventDateStr.split("/");
-            const eventDate = new Date(year, month - 1, day);
+            // Convert event date string (YYYY-MM-DD) to Date object
+            const eventDate = new Date(eventDateStr);  // Directly use the date string (YYYY-MM-DD)
 
             // Only show future or today events
             if (eventDate >= today) {
