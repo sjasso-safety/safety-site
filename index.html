@@ -33,51 +33,61 @@
             background: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .about {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 20px;
-        }
         /* Main layout and container */
-        .images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);  /* 3 columns for bigger images */
-            gap: 20px;  /* Space between images */
-            margin-bottom: 20px;  /* Adds space between the images section and text */
-        }
-        
-        .images img {
-            width: 100%;  /* Make images take up full column width */
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Ensures images resize well on smaller screens */
-        @media (max-width: 768px) {
-            .images {
-                grid-template-columns: 1fr 1fr;  /* 2 columns on smaller screens */
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .images {
-                grid-template-columns: 1fr;  /* 1 column on very small screens */
-            }
-        }
+.about {
+    display: flex;
+    justify-content: space-between; /* Allow space between images and text */
+    gap: 20px;  /* Space between the images section and text */
+}
 
-        .intro {
-            flex: 2;
-        }
-        .intro h2 {
-            margin-top: 0;
-        }
-        .contact {
-            margin-top: 20px;
-            font-size: 1.1em;
-        }
+.images {
+    flex: 1;  /* Take up more space for images */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 columns for bigger images */
+    gap: 20px;
+}
+
+.images img {
+    width: 100%;  /* Make images take up full column width */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Intro section (text) */
+.intro {
+    flex: 2;  /* Take up more space for the text */
+    padding: 20px;
+}
+
+.intro h2 {
+    margin-top: 0;
+}
+
+.contact {
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+/* Ensures images resize well on smaller screens */
+@media (max-width: 768px) {
+    .images {
+        grid-template-columns: 1fr 1fr;  /* 2 columns on smaller screens */
+    }
+    .about {
+        flex-direction: column;  /* Stack the text and images vertically */
+    }
+}
+
+@media (max-width: 480px) {
+    .images {
+        grid-template-columns: 1fr;  /* 1 column on very small screens */
+    }
+    .about {
+        flex-direction: column;  /* Stack the text and images vertically */
+    }
+}
+
         table {
             width: 100%;
             border-collapse: collapse;
