@@ -34,30 +34,80 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         /* Main layout and container */
+/* Main layout and container */
 .about {
     display: flex;
     justify-content: space-between; /* Allow space between images and text */
-    gap: 20px;  /* Space between the images section and text */
-}
-
-.images {
-    flex: 1;  /* Take up more space for images */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);  /* 3 columns for bigger images */
     gap: 20px;
+    position: relative;  /* Allow absolute positioning of images */
 }
 
-.images img {
-    width: 100%;  /* Make images take up full column width */
-    height: auto;
+/* Images section */
+.images {
+    position: absolute;  /* Absolute positioning within the about section */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;  /* Stretch to fill height */
+    z-index: -1;  /* Keep images behind text */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+/* Large images spread across the screen */
+.img-closeup {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image fills the space */
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.img-far {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.img-dragline-close {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.img-dragline-far {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.img-dragline-top {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 /* Intro section (text) */
 .intro {
-    flex: 2;  /* Take up more space for the text */
+    flex: 2;  /* Text takes up the majority of space */
+    z-index: 1; /* Keep the text in front of images */
     padding: 20px;
+    margin-top: 40px;
 }
 
 .intro h2 {
@@ -69,24 +119,27 @@
     font-size: 1.1em;
 }
 
-/* Ensures images resize well on smaller screens */
+/* Ensure everything is responsive */
 @media (max-width: 768px) {
     .images {
-        grid-template-columns: 1fr 1fr;  /* 2 columns on smaller screens */
+        grid-template-columns: 1fr 1fr;  /* Use 2 columns on smaller screens */
+        grid-template-rows: 1fr 1fr;
     }
     .about {
-        flex-direction: column;  /* Stack the text and images vertically */
+        flex-direction: column; /* Stack text and images vertically on small screens */
     }
 }
 
 @media (max-width: 480px) {
     .images {
-        grid-template-columns: 1fr;  /* 1 column on very small screens */
+        grid-template-columns: 1fr;  /* 1 column for mobile */
+        grid-template-rows: 1fr;
     }
     .about {
-        flex-direction: column;  /* Stack the text and images vertically */
+        flex-direction: column; /* Stack the images and text vertically */
     }
 }
+
 
         table {
             width: 100%;
