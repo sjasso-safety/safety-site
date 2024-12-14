@@ -95,13 +95,13 @@
         <!-- About Section -->
         <section class="about">
             <div class="images">
-                <img src="closeup.jpg" alt="Shilo">
-                <img src="far.jpg" alt="Shilo next to a haul truck">
+                <img src="closeup.jpg" alt="Closeup of safety equipment">
+                <img src="far.jpg" alt="Far view of a worksite">
             </div>
             <div class="intro">
                 <h2>Welcome</h2>
                 <p>
-                    With 25 years of experience in the mining industry, I specialize in providing comprehensive MSHA and OSHA training,
+                    With years of experience in workplace safety, I specialize in providing comprehensive MSHA and OSHA training,
                     as well as thorough safety inspections. Let me help ensure your workplace remains safe, compliant, and efficient.
                 </p>
                 <div class="contact">
@@ -113,7 +113,7 @@
 
         <!-- Calendar Section -->
         <section class="calendar">
-            <h2>Upcoming Training Dates</h2>
+            <h2>Upcoming Training & Inspection Dates</h2>
             <table id="calendar-table">
                 <thead>
                     <tr>
@@ -139,40 +139,50 @@
                 const csvText = await response.text();
 
                 const rows = csvText.split("\n").map(row => row.split(","));
-
-                // Check if CSV contains any data (excluding headers)
-                if (rows.length <= 1 || rows[1].length === 0) {
-                    // If CSV is empty, hide the calendar section
-                    document.querySelector(".calendar").style.display = "none";
-                    return;  // Exit the function early if no data
-                }
+                
+                // Get today's date
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);  // Set time to 00:00:00 to ignore time differences
 
                 const tbody = document.querySelector("#calendar-table tbody");
                 tbody.innerHTML = "";
 
-                // Populate the table with CSV data
                 for (let i = 1; i < rows.length; i++) {
-                    const tr = document.createElement("tr");
+                    const eventDateStr = rows[i][0].trim();  // Assuming date is in the first column (index 0)
+                    const eventTime = rows[i][1].trim();     // Assuming time is in the second column (index 1)
+                    const eventTitle = rows[i][2].trim();    // Assuming event title is in the third column (index 2)
 
-                    rows[i].forEach(cell => {
-                        const td = document.createElement("td");
-                        td.textContent = cell.trim();
-                        tr.appendChild(td);
-                    });
+                    // Convert event date string to Date object (assuming format is MM/DD/YYYY)
+                    const [month, day, year] = eventDateStr.split("/");
+                    const eventDate = new Date(year, month - 1, day);
+                    
+                    // Only show future or today events
+                    if (eventDate >= today) {
+                        const tr = document.createElement("tr");
 
-                    tbody.appendChild(tr);
+                        const tdDate = document.createElement("td");
+                        tdDate.textContent = eventDate.toLocaleDateString();
+                        tr.appendChild(tdDate);
+
+                        const tdTime = document.createElement("td");
+                        tdTime.textContent = eventTime;
+                        tr.appendChild(tdTime);
+
+                        const tdEvent = document.createElement("td");
+                        tdEvent.textContent = eventTitle;
+                        tr.appendChild(tdEvent);
+
+                        tbody.appendChild(tr);
+                    }
                 }
             } catch (error) {
                 console.error("Error fetching or parsing CSV data:", error);
-                document.querySelector(".calendar").style.display = "none";  // Hide the calendar in case of an error
             }
         }
 
-        // Display Email Address via string concatenation
+        // Display Email Address
         function displayEmail() {
-            const part1 = "sjasso";
-            const part2 = "@westriv.com";
-            const email = part1 + part2;  // Concatenate the two parts
+            const email = "sjasso@westriv.com";
             const emailElement = document.getElementById("email");
 
             emailElement.innerHTML = `<a href="mailto:${email}">${email}</a>`;
