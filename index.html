@@ -194,8 +194,8 @@ async function fetchAndDisplayCalendar() {
             const eventTime = rows[i][1].trim();     // Assuming time is in the second column (index 1)
             const eventTitle = rows[i][2].trim();    // Assuming event title is in the third column (index 2)
 
-            // Parse the date in "M-D-YYYY" format (Month-Day-Year)
-            const [month, day, year] = eventDateStr.split("-").map(Number);
+            // Parse the date in "M/D/YYYY" format (Month/Day/Year)
+            const [month, day, year] = eventDateStr.split("/").map(Number);
             const eventDate = new Date(year, month - 1, day);  // month - 1 because JavaScript months are 0-indexed
 
             // Validate the parsed date
