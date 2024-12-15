@@ -150,7 +150,7 @@
                     <tr>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Event</th>
+                        <th>Class</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -208,17 +208,18 @@ async function fetchAndDisplayCalendar() {
             if (eventDate >= today) {
                 const tr = document.createElement("tr");
 
+                // Order the columns as Date, Event, Time
                 const tdDate = document.createElement("td");
                 tdDate.textContent = eventDate.toLocaleDateString();
                 tr.appendChild(tdDate);
 
-                const tdTime = document.createElement("td");
-                tdTime.textContent = eventTime;
-                tr.appendChild(tdTime);
-
                 const tdEvent = document.createElement("td");
                 tdEvent.textContent = eventTitle;
                 tr.appendChild(tdEvent);
+
+                const tdTime = document.createElement("td");
+                tdTime.textContent = eventTime;
+                tr.appendChild(tdTime);
 
                 tbody.appendChild(tr);
             }
@@ -246,6 +247,7 @@ function displayEmail() {
 
 fetchAndDisplayCalendar();
 displayEmail();
+
 
     </script>
 </body>
